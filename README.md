@@ -10,9 +10,7 @@ Generate a clean, professional PDF CV from a Markdown file. Optionally password-
 ## Installation
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install .
+pip install md-cv-gen
 ```
 
 ## Usage
