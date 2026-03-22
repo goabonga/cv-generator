@@ -1,0 +1,51 @@
+[build-system]
+requires = ["setuptools>=68.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "md-cv-gen"
+version = "0.0.0"
+description = "Generate a clean, professional PDF CV from a Markdown file"
+readme = "README.md"
+license = "MIT"
+requires-python = ">=3.10"
+authors = [
+    { name = "Chris Becker", email = "goabonga@pm.me" },
+]
+keywords = ["cv", "resume", "pdf", "markdown", "generator"]
+classifiers = [
+    "Development Status :: 5 - Production/Stable",
+    "Environment :: Console",
+    "Intended Audience :: End Users/Desktop",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Topic :: Office/Business",
+    "Topic :: Text Processing :: Markup :: Markdown",
+    "Topic :: Printing",
+]
+dependencies = [
+    "markdown>=3.5",
+    "weasyprint>=62.0",
+    "pikepdf>=10.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/goabonga/md-cv-gen"
+Repository = "https://github.com/goabonga/md-cv-gen"
+Issues = "https://github.com/goabonga/md-cv-gen/issues"
+
+[project.scripts]
+md-cv-gen = "cv_generator:main"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+version = "0.0.0"
+tag_format = "v$version"
+version_files = [
+    "pyproject.toml:^version",
+]
+update_changelog_on_bump = true

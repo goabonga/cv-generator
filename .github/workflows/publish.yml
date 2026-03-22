@@ -1,0 +1,63 @@
+name: Bump, Changelog & Publish
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: write
+
+jobs:
+  bump-and-publish:
+    runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      contents: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-python@v6
+        with:
+          python-version: "3.13"
+
+      - name: Install dependencies
+        run: pip install commitizen build
+
+      - name: Configure git
+        run: |
+          git config --local user.email "${{ github.event.pusher.email }}"
+          git config --local user.name "${{ github.event.pusher.name }}"
+
+      - name: Bump version and changelog
+        id: bump
+        run: |
+          cz bump --changelog --yes 2>&1 && echo "bumped=true" >> "$GITHUB_OUTPUT" || echo "bumped=false" >> "$GITHUB_OUTPUT"
+          if [ -f CHANGELOG.md ]; then
+            VERSION=$(cz version --project)
+            echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Push changes and tag
+        if: steps.bump.outputs.bumped == 'true'
+        run: |
+          git push
+          git push --tags
+
+      - name: Create GitHub Release
+        if: steps.bump.outputs.bumped == 'true'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release create "v${{ steps.bump.outputs.version }}" --title "v${{ steps.bump.outputs.version }}" --notes-file CHANGELOG.md
+
+      - name: Build package
+        if: steps.bump.outputs.bumped == 'true'
+        run: python -m build
+
+      - name: Publish to PyPI
+        if: steps.bump.outputs.bumped == 'true'
+        uses: pypa/gh-action-pypi-publish@release/v1
