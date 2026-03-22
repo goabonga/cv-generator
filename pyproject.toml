@@ -10,7 +10,7 @@ readme = "README.md"
 license = "MIT"
 requires-python = ">=3.10"
 authors = [
-    { name = "Chris Becker", email = "goabonga@pm.me" },
+    { name = "Chris", email = "goabonga@pm.me" },
 ]
 keywords = ["cv", "resume", "pdf", "markdown", "generator"]
 classifiers = [
@@ -34,9 +34,9 @@ dependencies = [
 ]
 
 [project.urls]
-Homepage = "https://github.com/goabonga/md-cv-gen"
-Repository = "https://github.com/goabonga/md-cv-gen"
-Issues = "https://github.com/goabonga/md-cv-gen/issues"
+Homepage = "https://github.com/goabonga/cv-generator"
+Repository = "https://github.com/goabonga/cv-generator"
+Issues = "https://github.com/goabonga/cv-generator/issues"
 
 [project.scripts]
 md-cv-gen = "cv_generator:main"
