@@ -4,7 +4,7 @@ build-backend = "setuptools.build_meta"
 
 [project]
 name = "md-cv-gen"
-version = "0.0.0"
+version = "0.1.0"
 description = "Generate a clean, professional PDF CV from a Markdown file"
 readme = "README.md"
 license = "MIT"
@@ -43,7 +43,7 @@ md-cv-gen = "cv_generator:main"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
-version = "0.0.0"
+version = "0.1.0"
 tag_format = "v$version"
 version_files = [
     "pyproject.toml:^version",
