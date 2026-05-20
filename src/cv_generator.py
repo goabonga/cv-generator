@@ -168,10 +168,19 @@ def convert(md_path: Path, output_path: Path, password: str | None = None) -> No
 
 
 def main() -> None:
-    parser = argparse.ArgumentParser(description="Generate a PDF CV from a Markdown file")
+    parser = argparse.ArgumentParser(
+        description="Generate a PDF CV from a Markdown file"
+    )
     parser.add_argument("input", help="Markdown source file")
-    parser.add_argument("-o", "--output", default=None, help="Output file (.pdf or .html) — without -o, outputs HTML to stdout")
-    parser.add_argument("-p", "--password", default=None, help="Password to protect the PDF")
+    parser.add_argument(
+        "-o",
+        "--output",
+        default=None,
+        help="Output file (.pdf or .html) — without -o, outputs HTML to stdout",
+    )
+    parser.add_argument(
+        "-p", "--password", default=None, help="Password to protect the PDF"
+    )
     args = parser.parse_args()
 
     md_path = Path(args.input)
@@ -187,7 +196,10 @@ def main() -> None:
     elif Path(args.output).suffix == ".pdf":
         convert(md_path, Path(args.output), password=args.password)
     else:
-        print(f"Error: unsupported format '{Path(args.output).suffix}'. Use .pdf or .html", file=sys.stderr)
+        print(
+            f"Error: unsupported format '{Path(args.output).suffix}'. Use .pdf or .html",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
 
