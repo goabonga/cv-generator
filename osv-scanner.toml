@@ -1,0 +1,21 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Chris <goabonga@pm.me>
+
+# OSV-Scanner ignore list. Entries here are reviewed advisories that
+# cannot be acted on yet; each carries a justification and an
+# `ignoreUntil` review date so the suppression is revisited, not
+# forgotten.
+
+[[IgnoredVulns]]
+id = "PYSEC-2026-89"            # CVE-2025-69534 / GHSA-5wmx-573v-2qwq
+ignoreUntil = 2026-08-20
+# DoS in python-markdown: malformed HTML-like input raises an uncaught
+# AssertionError. Per OSV, ALL markdown versions are affected and no fix
+# is released yet (the latest published 3.10.2 is still vulnerable), so
+# there is nothing to upgrade to. Unlike most of our repos, `markdown`
+# here is a direct RUNTIME dependency, but md-cv-gen is a local CLI: it
+# parses a Markdown file the user passes on their own command line, not
+# attacker-controlled input from a network service. An uncaught
+# AssertionError would only crash the user's own invocation. Drop this
+# entry once a patched markdown is published.
+reason = "No fix available; local CLI parsing the user's own trusted markdown file"
