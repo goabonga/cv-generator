@@ -1,22 +1,21 @@
-[build-system]
-requires = ["setuptools>=68.0"]
-build-backend = "setuptools.build_meta"
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Chris <goabonga@pm.me>
 
 [project]
 name = "md-cv-gen"
 version = "0.1.1"
 description = "Generate a clean, professional PDF CV from a Markdown file"
 readme = "README.md"
-license = "MIT"
 requires-python = ">=3.10"
-authors = [
-    { name = "Chris", email = "goabonga@pm.me" },
-]
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Chris", email = "goabonga@pm.me" }]
 keywords = ["cv", "resume", "pdf", "markdown", "generator"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: End Users/Desktop",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -33,19 +32,54 @@ dependencies = [
     "pikepdf>=10.0",
 ]
 
+[project.scripts]
+md-cv-gen = "cv_generator:main"
+
 [project.urls]
 Homepage = "https://github.com/goabonga/cv-generator"
 Repository = "https://github.com/goabonga/cv-generator"
 Issues = "https://github.com/goabonga/cv-generator/issues"
+Changelog = "https://github.com/goabonga/cv-generator/blob/main/CHANGELOG.md"
 
-[project.scripts]
-md-cv-gen = "cv_generator:main"
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
 
-[tool.commitizen]
-name = "cz_conventional_commits"
-version = "0.1.1"
-tag_format = "v$version"
-version_files = [
-    "pyproject.toml:^version",
+# Single-module package under src/: ship src/cv_generator.py as the
+# top-level `cv_generator` module (the entry point is cv_generator:main).
+[tool.hatch.build.targets.wheel]
+only-include = ["src/cv_generator.py"]
+
+[tool.hatch.build.targets.wheel.sources]
+"src" = ""
+
+[tool.hatch.build.targets.sdist]
+include = ["src/cv_generator.py", "README.md", "LICENSE", "pyproject.toml"]
+
+[dependency-groups]
+dev = [
+    "ruff>=0.13",
 ]
-update_changelog_on_bump = true
+
+[tool.ruff]
+line-length = 88
+target-version = "py310"
+src = ["src"]
+extend-exclude = [".venv", "dist", "build"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "UP",   # pyupgrade
+    "SIM",  # flake8-simplify
+]
+# E501 (line length) is enforced by the formatter, not the linter: the
+# embedded CSS and a couple of message strings legitimately run long.
+ignore = ["E501"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
