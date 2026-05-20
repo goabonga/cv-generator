@@ -1,0 +1,96 @@
+# SPDX-License-Identifier: MIT
+# Copyright (c) 2025-2026 Chris <goabonga@pm.me>
+
+name: Bug Report
+description: Report a bug or unexpected behavior
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for reporting a bug! Please fill in the details below.
+
+  - type: input
+    id: version
+    attributes:
+      label: md-cv-gen version
+      description: "Output of `pip show md-cv-gen`."
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A clear description of the bug.
+    validations:
+      required: true
+
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to Reproduce
+      description: How can we reproduce this issue? Include the exact command line and a minimal Markdown input.
+      placeholder: |
+        1. Run `md-cv-gen cv.md -o cv.pdf`
+        2. ...
+        3. See error
+    validations:
+      required: true
+
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected Behavior
+      description: What did you expect to happen?
+    validations:
+      required: true
+
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual Behavior
+      description: What actually happened? Include the generated output if applicable.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: output-format
+    attributes:
+      label: Output format
+      options:
+        - PDF
+        - HTML
+        - stdout (HTML)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: python-version
+    attributes:
+      label: Python Version
+      options:
+        - "3.10"
+        - "3.11"
+        - "3.12"
+        - "3.13"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: os
+    attributes:
+      label: Operating System
+      options:
+        - Linux
+        - macOS
+        - Windows
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Logs / Traceback
+      description: Paste any relevant logs or error output.
+      render: shell
