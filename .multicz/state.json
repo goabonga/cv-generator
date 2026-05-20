@@ -1,0 +1,13 @@
+{
+  "version": 1,
+  "git_head": "952760d851e7686a6dabb979186d9aef1c19bfe1",
+  "git_head_short": "952760d",
+  "timestamp": "2026-05-20T16:24:20Z",
+  "components": {
+    "md-cv-gen": {
+      "version": "1.0.0",
+      "tag": "v1.0.0",
+      "tag_sha": null
+    }
+  }
+}

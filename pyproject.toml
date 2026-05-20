@@ -3,7 +3,7 @@
 
 [project]
 name = "md-cv-gen"
-version = "0.1.1"
+version = "1.0.0"
 description = "Generate a clean, professional PDF CV from a Markdown file"
 readme = "README.md"
 requires-python = ">=3.10"

@@ -6,6 +6,12 @@ adheres to [Semantic Versioning](https://semver.org/). New entries are
 generated from [Conventional Commits](https://www.conventionalcommits.org/)
 by [multicz](https://github.com/goabonga/multicz).
 
+## [1.0.0] - 2026-05-20
+
+### Breaking changes
+
+- migrate to uv with a src layout and hatchling (`77f29aa`)
+
 ## [0.1.1] - 2026-03-22
 
 ### Fixed
